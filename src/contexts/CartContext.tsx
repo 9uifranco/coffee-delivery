@@ -9,10 +9,24 @@ interface NewCoffeeData {
 
 interface CartContextType {
     coffees: NewCoffeeData[] | undefined
+    addressData: AddressDataType
+    paymentSelected: string
+    updatePaymentSelected(payment: string): void
+    updateAddressData(targetName: string, targetValue: string | number) : void
     addNewCoffeeToCart(newCoffeesArray: NewCoffeeData[]): void
     removeSelectedCoffeeFromCart(id: number): void
     increaseSelectedCoffeeAmount(id: number): void
     decreaseSelectedCoffeeAmount(id: number): void
+}
+
+interface AddressDataType {
+    cep: number | string
+    rua: string
+    numero: number | string
+    complemento: string
+    bairro: string
+    cidade: string
+    uf: string
 }
 
 export const CartContext = createContext({} as CartContextType) 
@@ -24,6 +38,28 @@ interface CartContextProviderProps {
 export function CartContextProvider({ children }: CartContextProviderProps) {
 
     const [selectedCoffees, setSelectedCoffees] = useState<NewCoffeeData[]>([])
+
+    const [addressData, setAddressData] = useState<AddressDataType>({
+        cep: '',
+        rua: '',
+        numero: '',
+        complemento: '',
+        bairro: '',
+        cidade: '',
+        uf: ''
+    })
+
+    const [paymentSelected, setPaymentSelected] = useState('')
+
+    const [targetArray, setTargetArray] = useState<any>([])
+
+    function updateAddressData(targetName: string, targetValue: string | number) {
+        setAddressData({ ...addressData, [targetName]: targetValue });
+    }
+
+    function updatePaymentSelected(payment: string) {
+        setPaymentSelected(payment)
+    }
 
     function addNewCoffeeToCart(newCoffeesArray: NewCoffeeData[]) {
         setSelectedCoffees(newCoffeesArray)
@@ -73,6 +109,10 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     return (
         <CartContext.Provider value={{
                 coffees: selectedCoffees,
+                addressData,
+                paymentSelected,
+                updatePaymentSelected,
+                updateAddressData,
                 addNewCoffeeToCart,
                 removeSelectedCoffeeFromCart,
                 increaseSelectedCoffeeAmount,

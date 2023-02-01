@@ -13,9 +13,9 @@ interface CoffeeCardProps {
 export function CoffeeCard({ id, imgSrc, title, description, category, price }: CoffeeCardProps) {
     const { coffees, addNewCoffeeToCart } = useContext(CartContext)
 
-    let curCoffee = coffees?.find(coffee => coffee.id === id)
-    
     const [amount, setAmount] = useState(1)
+
+    const curCoffee = coffees?.find(coffee => coffee.id === id)
 
     useEffect(() => {
         // If this coffee has been included
@@ -89,7 +89,13 @@ export function CoffeeCard({ id, imgSrc, title, description, category, price }: 
                 <button type="button" onClick={decreaseAmount}>-</button>
                 <span>{amount}</span>
                 <button type="button" onClick={increaseAmount}>+</button>
-                <button type="submit">Add</button>
+                {
+                    !curCoffee || curCoffee.amount !== amount ? (
+                        <button type="submit">Add</button>
+                    ) : (
+                        <button type="submit">✓</button>
+                    )
+                }
             </form>
         </article>
         
