@@ -67,7 +67,7 @@ export function Cart() {
                     return (
                         <div key={coffee.id}>
                             <span>{coffee.title}</span>
-                            <span>{coffee.price}</span>
+                            <span>{coffee.price.toFixed(2)}</span>
                             <button type="button" onClick={() => decreaseAmount(coffee.id)}>-</button>
                             <span>{coffee.amount}</span>
                             <button type="button" onClick={() => increaseAmount(coffee.id)}>+</button>
@@ -76,9 +76,9 @@ export function Cart() {
                     )
                 })
             }
-            <span>Total de itens: {totalPrice}</span>
-            <span>Entrega: {deliveryFee}</span>
-            <strong>Total: {totalPrice! + deliveryFee}</strong>
+            <span>Total de itens: {totalPrice?.toFixed(2)}</span>
+            <span>Entrega: {deliveryFee.toFixed(2)}</span>
+            <strong>Total: {(totalPrice! + deliveryFee).toFixed(2)}</strong>
             <button onClick={handleClickConfirmButton}>Confirmar Pedido</button>
         </div>
     )

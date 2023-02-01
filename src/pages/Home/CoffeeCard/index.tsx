@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { CartContext } from "../../../contexts/CartContext"
+import { CoffeeCardContainer, IconContainerPurpleDark, IconContainerYellow } from "./styles"
+import { ShoppingCartSimple, Check, Plus, Minus } from 'phosphor-react'
 
 interface CoffeeCardProps {
     id: number
@@ -73,31 +75,48 @@ export function CoffeeCard({ id, imgSrc, title, description, category, price }: 
     }
 
     return (
-        <article>
+        <CoffeeCardContainer>
             <img src={imgSrc} alt="" />
-            <span>{title}</span>
-            <span>{description}</span>
-            {
-                category.map((type, index) => {
-                    return (
-                        <strong key={index}>{type}</strong>
-                    )
-                })
-            }
-            <span>{price}</span>
-            <form onSubmit={addNewCoffee}>
-                <button type="button" onClick={decreaseAmount}>-</button>
-                <span>{amount}</span>
-                <button type="button" onClick={increaseAmount}>+</button>
+            <div className="categoryContainer">
                 {
-                    !curCoffee || curCoffee.amount !== amount ? (
-                        <button type="submit">Add</button>
-                    ) : (
-                        <button type="submit">✓</button>
-                    )
+                    category.map((type, index) => {
+                        return (
+                            <span key={index}>{type.toUpperCase()}</span>
+                        )
+                    })
                 }
-            </form>
-        </article>
+            </div>
+            <h1>{title}</h1>
+            <p>{description}</p>
+            <footer>
+                <div>
+                    <span className="currency">R$</span>
+                    <span className="price">{price.toFixed(2)}</span>
+                </div>
+                <form onSubmit={addNewCoffee}>
+                    <div className="amountContainer">
+                        <button type="button" onClick={decreaseAmount}>
+                            <Minus size={14}/>
+                        </button>
+                        <span>{amount}</span>
+                        <button type="button" onClick={increaseAmount}>
+                            <Plus size={14}/>
+                        </button>
+                    </div>
+                    {
+                        !curCoffee || curCoffee.amount !== amount ? (
+                            <IconContainerPurpleDark type="submit">
+                                <ShoppingCartSimple size={22}/>
+                            </IconContainerPurpleDark>
+                        ) : (
+                            <IconContainerYellow type="submit">
+                                <Check size={22}/>
+                            </IconContainerYellow>
+                        )
+                    }
+                </form>
+            </footer>
+        </CoffeeCardContainer>
         
     )
 }
