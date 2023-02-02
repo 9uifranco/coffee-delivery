@@ -6,6 +6,7 @@ export const NavContainer = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin: 0 10rem;
 `
 
 export const IconContainer = styled.div`

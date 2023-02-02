@@ -1,11 +1,17 @@
 import styled from "styled-components";
 
+import background from '../../assets/background-home.png'
+
 export const HomeContainer = styled.main`
+    background-image: url(${background});
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 100wh;
 
     header {
-        height: 34rem;
         padding: 6rem 0;
         width: 50%;
+        margin: 0 10rem;
     }
 
     header > h1 {
@@ -23,6 +29,10 @@ export const HomeContainer = styled.main`
         font-weight: 500;
         color: #403937;
         line-height: 130%;    
+    }
+
+    section {
+        margin: 0 10rem;
     }
 
     section > strong {
@@ -55,6 +65,16 @@ export const HomeContainer = styled.main`
         font-size: 1rem;
         color: #574F4D;
         margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+        section {
+            margin: 0 0rem;
+        }
+
+        section > div {
+            grid-template-columns: 1fr;
+        }
     }
 `
 
