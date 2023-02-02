@@ -46,6 +46,7 @@ export function CoffeeCard({ id, imgSrc, title, description, category, price }: 
         const newCoffee = {
             id,
             title,
+            imgSrc,
             price,
             amount: newAmount
         }

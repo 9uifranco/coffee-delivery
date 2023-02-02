@@ -141,31 +141,31 @@ export function Home() {
                 <h1>Encontre o café perfeito para qualquer hora do dia</h1>
                 <span>Com o Coffee Delivery você recebe seu café onde estiver, a<br/> qualquer hora</span>
                 <div className="benefits">
-                        <div>
-                            <IconContainerYellowDark>
-                                <ShoppingCart size={16}/>
-                            </IconContainerYellowDark>
-                            Compra simples e segura
-                        </div>
-                        <div>
-                            <IconContainerGray>
-                                <Package size={16}/>
-                            </IconContainerGray>
-                            Embalagem mantém o café intacto
-                        </div>
+                    <div>
+                        <IconContainerYellowDark>
+                            <ShoppingCart size={16}/>
+                        </IconContainerYellowDark>
+                        Compra simples e segura
+                    </div>
+                    <div>
+                        <IconContainerGray>
+                            <Package size={16}/>
+                        </IconContainerGray>
+                        Embalagem mantém o café intacto
+                    </div>
 
-                        <div>
-                            <IconContainerYellow>
-                                <Timer size={16}/>
-                            </IconContainerYellow>
-                            Entrega rápida e rastreada
-                        </div>
-                        <div>
-                            <IconContainerPurple>
-                                <Coffee size={16}/>
-                            </IconContainerPurple>
-                            O café chega fresquinho até você
-                        </div>
+                    <div>
+                        <IconContainerYellow>
+                            <Timer size={16}/>
+                        </IconContainerYellow>
+                        Entrega rápida e rastreada
+                    </div>
+                    <div>
+                        <IconContainerPurple>
+                            <Coffee size={16}/>
+                        </IconContainerPurple>
+                        O café chega fresquinho até você
+                    </div>
                 </div>
             </header>
             

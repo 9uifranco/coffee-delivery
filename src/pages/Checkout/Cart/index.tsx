@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { CartContext } from "../../../contexts/CartContext";
 import * as zod from 'zod'
+import { CartContainer, SelectedCoffeesContainer, CoffeeContainer, ConfirmButton, RemoveButton } from "./styles";
+import { Minus, Plus, Trash } from 'phosphor-react'
 
 const addressValidationSchema = zod.object({
     cep: zod.number().min(1, "Type your zip code"),
@@ -60,26 +62,52 @@ export function Cart() {
     const deliveryFee = 3.5
 
     return (
-        <div>
-            <h2>Cafés selecionados</h2>
-            {
-                coffees?.map(coffee => {
-                    return (
-                        <div key={coffee.id}>
-                            <span>{coffee.title}</span>
-                            <span>{coffee.price.toFixed(2)}</span>
-                            <button type="button" onClick={() => decreaseAmount(coffee.id)}>-</button>
-                            <span>{coffee.amount}</span>
-                            <button type="button" onClick={() => increaseAmount(coffee.id)}>+</button>
-                            <button onClick={() => handleClickRemoveButton(coffee.id)} type="button">Remove</button>
-                        </div>
-                    )
-                })
-            }
-            <span>Total de itens: {totalPrice?.toFixed(2)}</span>
-            <span>Entrega: {deliveryFee.toFixed(2)}</span>
-            <strong>Total: {(totalPrice! + deliveryFee).toFixed(2)}</strong>
-            <button onClick={handleClickConfirmButton}>Confirmar Pedido</button>
-        </div>
+        <CartContainer>
+            <h1>Cafés selecionados</h1>
+            <SelectedCoffeesContainer>
+                {
+                    coffees?.map(coffee => {
+                        return (
+                            <CoffeeContainer key={coffee.id}>
+                                <img src={coffee.imgSrc}/>
+                                <div>
+                                    <div>
+                                        <span>{coffee.title}</span>
+                                        <span>R$ {coffee.price.toFixed(2)}</span>
+                                    </div>
+                                    <div>
+                                        <div className="amountContainer">
+                                            <button type="button" onClick={() => decreaseAmount(coffee.id)}>
+                                                <Minus size={14}/>
+                                            </button>
+                                            <span>{coffee.amount}</span>
+                                            <button type="button" onClick={() => increaseAmount(coffee.id)}>
+                                                <Plus size={14}/>
+                                            </button>
+                                        </div>
+                                        <RemoveButton onClick={() => handleClickRemoveButton(coffee.id)} type="button"><Trash color={'#8047F8'} size={16}/> REMOVER</RemoveButton>
+                                    </div>
+                                </div>
+                            </CoffeeContainer>
+                        )
+                    })
+                }
+                <div className="totalPrice">
+                    <div>
+                        <span>Total de itens: </span>
+                        <span>R$ {totalPrice?.toFixed(2)}</span>
+                    </div>
+                    <div>
+                        <span>Entrega: </span>
+                        <span>R$ {deliveryFee.toFixed(2)}</span>
+                    </div>
+                    <div>
+                        <strong>Total: </strong>
+                        <strong>R$ {(totalPrice! + deliveryFee).toFixed(2)}</strong>
+                    </div>
+                </div>
+                <ConfirmButton onClick={handleClickConfirmButton}>CONFIRMAR PEDIDO</ConfirmButton>
+            </SelectedCoffeesContainer>
+        </CartContainer>
     )
 }

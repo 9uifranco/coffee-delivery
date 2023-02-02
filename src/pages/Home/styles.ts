@@ -6,11 +6,11 @@ export const HomeContainer = styled.main`
     background-image: url(${background});
     background-repeat: no-repeat;
     background-size: contain;
-    width: 100wh;
+    width: 100%;
 
     header {
         padding: 6rem 0;
-        width: 50%;
+        width: 40%;
         margin: 0 10rem;
     }
 
@@ -55,6 +55,7 @@ export const HomeContainer = styled.main`
         margin-top: 4.125rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
+        width: 37rem;
     }
 
     .benefits > div {

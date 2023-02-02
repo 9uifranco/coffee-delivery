@@ -3,6 +3,7 @@ import { createContext, ReactNode, useState } from "react";
 interface NewCoffeeData {
     id: number
     title: string
+    imgSrc: string
     price: number
     amount: number
 }

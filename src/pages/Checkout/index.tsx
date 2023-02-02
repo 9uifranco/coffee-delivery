@@ -2,12 +2,13 @@ import { useContext } from "react"
 import { CartContext } from "../../contexts/CartContext"
 import { AddressForm } from "./AddressForm"
 import { Cart } from "./Cart"
+import { CheckoutContainer } from "./styles"
 
 export function Checkout() {
     const { coffees } = useContext(CartContext)
 
     return (
-        <main>
+        <CheckoutContainer>
             {
                 coffees && coffees.length > 0 ? (
 
@@ -22,6 +23,6 @@ export function Checkout() {
 
             }
             
-        </main>
+        </CheckoutContainer>
     )
 }
