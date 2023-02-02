@@ -55,11 +55,13 @@ export function AddressForm() {
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
 
         const targetName = e.target.name
-        let targetValue: string | number = e.target.name
+        let targetValue: string | number = e.target.value
         
         if(e.target.type == "number") {
             targetValue = parseInt(e.target.value)
         }
+
+        console.log(e.target.value)
 
         updateAddressData(targetName, targetValue)
     }

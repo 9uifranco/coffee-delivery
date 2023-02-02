@@ -8,14 +8,14 @@ const addressValidationSchema = zod.object({
     cep: zod.number().min(1, "Type your zip code"),
     rua: zod.string().min(1, "Type your street name"),
     numero: zod.number().min(1, "Type your house number"),
-    complemento: zod.string(),
+    complemento: zod.string().optional(),
     bairro: zod.string().min(1, "Digite seu bairro"),
     cidade: zod.string().min(1, "Type your zip code"),
     uf: zod.string().length(2, "Type a valid UF")
 })
 
 export function Cart() {
-    const { coffees, addressData, removeSelectedCoffeeFromCart, increaseSelectedCoffeeAmount, decreaseSelectedCoffeeAmount } = useContext(CartContext)
+    const { coffees, addressData, paymentSelected, removeSelectedCoffeeFromCart, increaseSelectedCoffeeAmount, decreaseSelectedCoffeeAmount } = useContext(CartContext)
 
     function increaseAmount(id: number) {
         increaseSelectedCoffeeAmount(id)
@@ -52,7 +52,9 @@ export function Cart() {
             //e.target.setCustomValidity
 
         } else {
-            console.log("Sucess")
+            if(paymentSelected) {
+                alert("Sucess")
+            }
             // Go to success page
         }
     }
@@ -73,7 +75,7 @@ export function Cart() {
                                 <div>
                                     <div>
                                         <span>{coffee.title}</span>
-                                        <span>R$ {coffee.price.toFixed(2)}</span>
+                                        <span>R$ {(coffee.amount * coffee.price).toFixed(2)}</span>
                                     </div>
                                     <div>
                                         <div className="amountContainer">

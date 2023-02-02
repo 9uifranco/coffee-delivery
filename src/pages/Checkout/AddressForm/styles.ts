@@ -61,6 +61,18 @@ const InfoSectionContainer = styled.section`
         color: #574F4D;
     }
 
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
+
     input::placeholder {
         color: #8D8686
     }
