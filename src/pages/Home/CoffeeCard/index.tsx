@@ -13,7 +13,7 @@ interface CoffeeCardProps {
 }
 
 export function CoffeeCard({ id, imgSrc, title, description, category, price }: CoffeeCardProps) {
-    const { coffees, addNewCoffeeToCart } = useContext(CartContext)
+    const { coffees, addNewCoffeeToCart, updateSelectedCoffee } = useContext(CartContext)
 
     const [amount, setAmount] = useState(1)
 
@@ -51,28 +51,12 @@ export function CoffeeCard({ id, imgSrc, title, description, category, price }: 
             amount: newAmount
         }
 
-        if(coffees && coffees.length > 0) {
-            // If this coffee has been included
-            if(curCoffee) {
-                const updatedCoffeesArray = coffees.map(coffee => {
-                    if(coffee.id === id) {
-                        return newCoffee;
-                    }
-                    return coffee;
-                })
-    
-                addNewCoffeeToCart(updatedCoffeesArray)
-            }
-            // If this coffee has not been included
-            else {
-                addNewCoffeeToCart([...coffees, newCoffee])
-            }
-            
+        if(curCoffee) {
+            updateSelectedCoffee(id, newCoffee)
+            return
         }
-        // If there are no coffees included
-        else {
-            addNewCoffeeToCart([newCoffee])
-        }
+
+        addNewCoffeeToCart(newCoffee)
     }
 
     return (
