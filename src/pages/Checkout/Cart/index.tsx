@@ -5,17 +5,17 @@ import { CartContainer, SelectedCoffeesContainer, CoffeeContainer, ConfirmButton
 import { Minus, Plus, Trash } from 'phosphor-react'
 
 const addressValidationSchema = zod.object({
-    cep: zod.number().min(1, "Type your zip code"),
-    rua: zod.string().min(1, "Type your street name"),
-    numero: zod.number().min(1, "Type your house number"),
+    cep: zod.number().min(1, "Informe um CEP válido").max(99999999, "Informe um CEP válido"),
+    rua: zod.string().min(1, "Informe o nome da sua rua"),
+    numero: zod.number().min(1, "Informe o número do local de entrega"),
     complemento: zod.string().optional(),
-    bairro: zod.string().min(1, "Digite seu bairro"),
-    cidade: zod.string().min(1, "Type your zip code"),
-    uf: zod.string().length(2, "Type a valid UF")
+    bairro: zod.string().min(1, "Informe seu bairro"),
+    cidade: zod.string().min(1, "Informe sua cidade"),
+    uf: zod.string().length(2, "Informe um estado válido")
 })
 
 export function Cart() {
-    const { coffees, addressData, paymentSelected, removeSelectedCoffeeFromCart, increaseSelectedCoffeeAmount, decreaseSelectedCoffeeAmount } = useContext(CartContext)
+    const { coffees, addressData, paymentSelected, validateCheckout, removeSelectedCoffeeFromCart, increaseSelectedCoffeeAmount, decreaseSelectedCoffeeAmount } = useContext(CartContext)
 
     function increaseAmount(id: number) {
         increaseSelectedCoffeeAmount(id)
@@ -53,9 +53,11 @@ export function Cart() {
 
         } else {
             if(paymentSelected) {
-                alert("Sucess")
+                validateCheckout()
             }
-            // Go to success page
+            else{
+                // Choose a payment method
+            }
         }
     }
 

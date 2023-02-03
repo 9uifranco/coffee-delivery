@@ -74,7 +74,8 @@ export const HomeContainer = styled.main`
         header {
             margin: 0 0rem;
             width: 100%;
-            padding-left: 1rem;
+            padding: 1rem;
+            padding-top: 3rem;
         }
 
         .benefits {

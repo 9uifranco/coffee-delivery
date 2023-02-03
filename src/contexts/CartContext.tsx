@@ -12,6 +12,8 @@ interface CartContextType {
     coffees: NewCoffeeData[] | undefined
     addressData: AddressDataType
     paymentSelected: string
+    checkoutHasSucceed: boolean
+    validateCheckout(): void
     updatePaymentSelected(payment: string): void
     updateAddressData(targetName: string, targetValue: string | number) : void
     addNewCoffeeToCart(newCoffeesArray: NewCoffeeData[]): void
@@ -52,7 +54,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     const [paymentSelected, setPaymentSelected] = useState('')
 
-    const [targetArray, setTargetArray] = useState<any>([])
+    const [checkoutHasSucceed, setCheckoutHasSucceed] = useState<boolean>(false)
+
+    function validateCheckout() {
+        setCheckoutHasSucceed(true)
+    }
 
     function updateAddressData(targetName: string, targetValue: string | number) {
         setAddressData({ ...addressData, [targetName]: targetValue });
@@ -112,6 +118,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                 coffees: selectedCoffees,
                 addressData,
                 paymentSelected,
+                checkoutHasSucceed,
+                validateCheckout,
                 updatePaymentSelected,
                 updateAddressData,
                 addNewCoffeeToCart,
