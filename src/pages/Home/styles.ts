@@ -69,12 +69,43 @@ export const HomeContainer = styled.main`
     }
 
     @media (max-width: 768px) {
+        background-size: auto;
+
+        header {
+            margin: 0 0rem;
+            width: 100%;
+            padding-left: 1rem;
+        }
+
+        .benefits {
+            grid-template-columns: 1fr;
+            width: 100%;
+        }
+
         section {
             margin: 0 0rem;
+        }
+        
+        section > strong {
+            padding-left: 1rem;
         }
 
         section > div {
             grid-template-columns: 1fr;
+            margin: 0 0rem;
+            margin-top: 3.375rem;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1100px) {
+        section > div {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (min-width: 1100px) and (max-width: 1300px) {
+        section > div {
+            grid-template-columns: 1fr 1fr 1fr;
         }
     }
 `

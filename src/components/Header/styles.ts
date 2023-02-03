@@ -7,6 +7,11 @@ export const NavContainer = styled.nav`
     justify-content: space-between;
     align-items: center;
     margin: 0 10rem;
+
+    @media (max-width: 768px) {
+        margin: 0 0rem;
+        padding: 0 1rem;
+    }
 `
 
 export const IconContainer = styled.div`
