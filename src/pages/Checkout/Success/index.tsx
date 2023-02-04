@@ -38,7 +38,20 @@ export function Success() {
                             </IconContainerYellowDark> 
                             <div>
                                 <span>Pagamento na entrega</span>
-                                <strong>{paymentSelected}</strong>
+                                <strong>
+                                    {(() => {
+                                        switch(paymentSelected) {
+                                            case "debito":
+                                                return "Cartão de débito"
+                                            case "credito":
+                                                return "Cartão de crédito"
+                                            case "dinheiro":
+                                                return "Dinheiro"
+                                            default:
+                                                return null
+                                        }
+                                    })()}
+                                </strong>
                             </div>
                         </OrderInfoRow>
                     </OrderInfo>

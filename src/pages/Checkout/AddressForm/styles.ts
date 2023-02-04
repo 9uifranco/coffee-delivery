@@ -17,7 +17,6 @@ export const OrderInfoContainer = styled.section`
         font-size: 1.125rem;
         color: #272221;
         line-height: 130%;
-        margin-top: 2.5rem;
         margin-bottom: 1rem;
     }
 `
@@ -80,6 +79,10 @@ const InfoSectionContainer = styled.section`
     input:focus {
         border-color: #C47F17;
     }
+    
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const AddressFormContainer = styled(InfoSectionContainer)`
@@ -107,9 +110,35 @@ export const AddressFormContainer = styled(InfoSectionContainer)`
     .uf {
         width: 3.75rem;
     }
+
+    label {
+        color: red;
+        font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+        }
+
+        .row > input + input {
+            margin-left: 0rem;
+        } 
+    }
 `
 
 export const PaymentMethodContainer = styled(InfoSectionContainer)`
+    label {
+        color: red;
+        font-size: 0.75rem;
+    }
+
+    @media (max-width: 768px) {
+        .row {
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
 `
 
 type CustomCheckboxType = {
@@ -133,10 +162,6 @@ export const CustomCheckbox = styled.button<CustomCheckboxType>`
     outline: none;
     border: 1px solid #E6E5E5;
 
-    input {
-        display: none;
-    }
-
     :hover {
         color: #403937;
         background-color: ${props => (props.option == props.selected) ? "#EBE5F9" : "#D7D5D5"};
@@ -145,4 +170,7 @@ export const CustomCheckbox = styled.button<CustomCheckboxType>`
     background-color: ${props => (props.option == props.selected) ? "#EBE5F9" : "#E6E5E5"};
     border-color: ${props => (props.option == props.selected) ? "#8047F8" : "#E6E5E5"};
 
+    input {
+        display: none;
+    }
 `

@@ -1,21 +1,11 @@
 import { useContext } from "react";
 import { CartContext } from "../../../contexts/CartContext";
-import * as zod from 'zod'
 import { CartContainer, SelectedCoffeesContainer, CoffeeContainer, ConfirmButton, RemoveButton } from "./styles";
 import { Minus, Plus, Trash } from 'phosphor-react'
 
-const addressValidationSchema = zod.object({
-    cep: zod.number().min(1, "Informe um CEP válido").max(99999999, "Informe um CEP válido"),
-    rua: zod.string().min(1, "Informe o nome da sua rua"),
-    numero: zod.number().min(1, "Informe o número do local de entrega"),
-    complemento: zod.string().optional(),
-    bairro: zod.string().min(1, "Informe seu bairro"),
-    cidade: zod.string().min(1, "Informe sua cidade"),
-    uf: zod.string().length(2, "Informe um estado válido")
-})
-
 export function Cart() {
-    const { coffees, addressData, paymentSelected, validateCheckout, removeSelectedCoffeeFromCart, increaseSelectedCoffeeAmount, decreaseSelectedCoffeeAmount } = useContext(CartContext)
+
+    const { coffees, removeSelectedCoffeeFromCart, increaseSelectedCoffeeAmount, decreaseSelectedCoffeeAmount } = useContext(CartContext)
 
     function increaseAmount(id: number) {
         increaseSelectedCoffeeAmount(id)
@@ -27,38 +17,6 @@ export function Cart() {
 
     function handleClickRemoveButton(id: number) {
         removeSelectedCoffeeFromCart(id)
-    }
-
-    function handleClickConfirmButton() {
-        
-        const result = addressValidationSchema.safeParse(
-            {
-                cep: addressData.cep,
-                rua: addressData.rua,
-                numero: addressData.numero,
-                complemento: addressData.complemento,
-                bairro: addressData.bairro,
-                cidade: addressData.cidade,
-                uf: addressData.uf,
-            }
-        )
-        if(!result.success) {
-            result.error.errors.forEach(err => {
-                // set e.target.name = err.path[0] e.target.customValidity = err.message
-            })
-
-            //console.log(result.error.errors)
-            
-            //e.target.setCustomValidity
-
-        } else {
-            if(paymentSelected) {
-                validateCheckout()
-            }
-            else{
-                // Choose a payment method
-            }
-        }
     }
 
     const totalPrice = coffees?.reduce((acc, product) => acc + (product.price * product.amount), 0);
@@ -110,7 +68,7 @@ export function Cart() {
                         <strong>R$ {(totalPrice! + deliveryFee).toFixed(2)}</strong>
                     </div>
                 </div>
-                <ConfirmButton onClick={handleClickConfirmButton}>CONFIRMAR PEDIDO</ConfirmButton>
+                <ConfirmButton type="submit">CONFIRMAR PEDIDO</ConfirmButton>
             </SelectedCoffeesContainer>
         </CartContainer>
     )

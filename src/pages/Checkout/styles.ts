@@ -11,13 +11,17 @@ export const CheckoutContainer = styled.main`
         line-height: 130%;
     }
 
-    div {
+    form {
         display: flex;
-        //grid-template-columns: 1fr 1fr;
+        gap: 2rem;
     }
 
     @media (max-width: 768px) {
         margin: 1rem 0;
         padding: 1rem;
+
+        form {
+            flex-direction: column;
+        }
     }
 `

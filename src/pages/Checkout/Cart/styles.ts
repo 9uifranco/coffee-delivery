@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const CartContainer = styled.section`
     display: flex;
     flex-direction: column;
+    width: 100%;
     
     h1 {
         font-family: 'Baloo 2', cursive;
@@ -10,9 +11,7 @@ export const CartContainer = styled.section`
         font-size: 1.125rem;
         color: #272221;
         line-height: 130%;
-        margin-top: 2.5rem;
         margin-bottom: 1rem;
-        margin-left: 2rem;
     }
 `
 
@@ -24,7 +23,6 @@ export const SelectedCoffeesContainer = styled.section`
     border-bottom-left-radius: 36px;
     border-bottom-right-radius: 6px;
     width: 28rem;
-    margin-left: 2rem;
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
@@ -36,6 +34,7 @@ export const SelectedCoffeesContainer = styled.section`
     }
 
     .totalPrice > div {
+        display: flex;
         justify-content: space-between;
     }
 
@@ -59,6 +58,10 @@ export const SelectedCoffeesContainer = styled.section`
         font-size: 1.25rem;
         color: #403937
     } 
+
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const CoffeeContainer = styled.div`
@@ -101,6 +104,7 @@ export const CoffeeContainer = styled.div`
         span:nth-child(2) {
             font-weight: 700;
             color: #574F4D;
+            white-space: nowrap;
         }
     }
 
@@ -146,6 +150,13 @@ export const CoffeeContainer = styled.div`
             color: #8047F8;
             cursor: pointer;
         }
+    }
+
+    @media (max-width: 768px) {
+        div > div:nth-child(2) {
+            justify-content: space-between;
+            width: 100%;
+        }    
     }
 `
 
