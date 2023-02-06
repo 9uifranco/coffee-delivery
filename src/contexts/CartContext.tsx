@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer, useState } from "react";
+import { createContext, ReactNode, useEffect, useReducer, useState } from "react";
 
 interface NewCoffeeData {
     id: number
@@ -39,6 +39,14 @@ interface CartContextProviderProps {
     children: ReactNode
 }
 
+const initialCoffees: NewCoffeeData[] = [];
+
+const initializer = (initialValue = initialCoffees) => {
+    const itemFromStorage = localStorage.getItem("@coffee-delivery:selected-coffees-1.0.0")
+    if(itemFromStorage)
+        return JSON.parse(itemFromStorage) || initialValue;
+}
+
 export function CartContextProvider({ children }: CartContextProviderProps) {
     
     const [selectedCoffees, dispatch] = useReducer((state: NewCoffeeData[], action: any) => {
@@ -77,7 +85,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
             default:
                 return state
         }
-    }, [])
+    }, [], initializer)
 
     const [addressData, setAddressData] = useState<AddressDataType>({
         cep: '',
@@ -92,6 +100,11 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     const [paymentSelected, setPaymentSelected] = useState('')
 
     const [checkoutHasSucceed, setCheckoutHasSucceed] = useState<boolean>(false)
+
+    useEffect(() => {
+        const stateJSON = JSON.stringify(selectedCoffees)
+        localStorage.setItem('@coffee-delivery:selected-coffees-1.0.0', stateJSON)
+    }, [selectedCoffees])
 
     function addNewCoffeeToCart(newCoffee: NewCoffeeData) {
         dispatch({
