@@ -116,7 +116,8 @@ export function AddressForm() {
                     <input
                         className="cep"
                         value={addressData.cep}
-                        type="number"
+                        type="tel"
+                        maxLength={8}
                         placeholder="CEP"
                         {...register("cep", {
                             onChange: (e) => handleInputChange(e),
@@ -204,6 +205,7 @@ export function AddressForm() {
                             className="uf"
                             value={addressData.uf}
                             type="text"
+                            maxLength={2}
                             placeholder="UF"
                             {...register("uf", {
                                 onChange: (e) => handleInputChange(e),
