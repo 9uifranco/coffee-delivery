@@ -16,26 +16,22 @@ const addressValidationSchema = zod.object({
     bairro: zod.string().min(1, "Informe seu bairro"),
     cidade: zod.string().min(1, "Informe sua cidade"),
     uf: zod.string().length(2, "Informe um estado válido"),
-    paymentMethod: zod.string()
+    paymentMethod: zod.string().min(1, "Informe um método de pagamento")
 })
 
 type AddressData = zod.infer<typeof addressValidationSchema>
 
 export function Checkout() {
-    const { coffees, checkoutHasSucceed, paymentSelected, validateCheckout } = useContext(CartContext)
+    const { coffees, checkoutHasSucceed, validateCheckout } = useContext(CartContext)
 
     const methods = useForm<AddressData>({
         resolver: zodResolver(addressValidationSchema)
+        
     })
 
     function onFormSubmit(data: any) {
-        if(paymentSelected) {
-            validateCheckout()
-            console.log("My data:", data)
-        }
-        else {
-            console.log("INFORME UM MEIO DE PAGAMENTO")
-        }
+        validateCheckout()
+        console.log("My data:", data)
     }
 
     return (

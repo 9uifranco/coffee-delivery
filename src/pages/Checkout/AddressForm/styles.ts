@@ -146,7 +146,7 @@ type CustomCheckboxType = {
     selected: string
 }
 
-export const CustomCheckbox = styled.button<CustomCheckboxType>`
+export const CustomCheckbox = styled.div<CustomCheckboxType>`
     display: flex;
     flex-direction: row;
     align-items: center;

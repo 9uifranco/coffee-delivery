@@ -13,7 +13,7 @@ const addressValidationSchema = zod.object({
     bairro: zod.string().min(1, "Informe seu bairro"),
     cidade: zod.string().min(1, "Informe sua cidade"),
     uf: zod.string().length(2, "Informe um estado válido"),
-    paymentMethod: zod.string()
+    paymentMethod: zod.string().min(1, "Informe um método de pagamento")
 })
 
 type AddressData = zod.infer<typeof addressValidationSchema>
@@ -22,7 +22,7 @@ export function AddressForm() {
 
     const { addressData, paymentSelected, updatePaymentSelected, updateAddressData } = useContext(CartContext)
 
-    const { register, formState: { errors } } = useFormContext<AddressData>();
+    const { resetField, setValue, register, formState: { errors } } = useFormContext<AddressData>();
 
     const [paymentOptions, setPaymentOptions] = useState(
         [
@@ -57,8 +57,12 @@ export function AddressForm() {
         setPaymentOptions(initOptions)
     }, [])
 
-    function selectPaymentMethod(value: string) {
+    useEffect(() => {
+        resetField("paymentMethod")
+        setValue("paymentMethod", paymentSelected)
+    }, [paymentSelected])
 
+    function selectPaymentMethod(value: string) {
         const updatedOptions = paymentOptions.map(o => {
             if (o.value === value) {
                 updatePaymentSelected(o.value)
@@ -71,6 +75,7 @@ export function AddressForm() {
     }
 
     function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+        
         const targetName = e.target.name
         let targetValue: string | number = e.target.value
 
@@ -223,7 +228,7 @@ export function AddressForm() {
                     {
                         paymentOptions.map(o => {
                             return (
-                                <CustomCheckbox type="button" option={o.value} selected={paymentSelected} onClick={() => selectPaymentMethod(o.value)} key={o.id}>
+                                <CustomCheckbox option={o.value} selected={paymentSelected} onClick={() => selectPaymentMethod(o.value)} key={o.id}>
                                     {
                                         (o.value == "credito") && <CreditCard color={"#8047F8"} size={16} /> ||
                                         (o.value == "debito") && <Bank color={"#8047F8"} size={16} /> ||
