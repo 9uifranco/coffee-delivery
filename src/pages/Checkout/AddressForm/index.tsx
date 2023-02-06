@@ -12,7 +12,7 @@ const addressValidationSchema = zod.object({
     complemento: zod.string().optional(),
     bairro: zod.string().min(1, "Informe seu bairro"),
     cidade: zod.string().min(1, "Informe sua cidade"),
-    uf: zod.string().length(2, "Informe um estado válido"),
+    uf: zod.string().length(2, "Estado inválido"),
     paymentMethod: zod.string().min(1, "Informe um método de pagamento")
 })
 
@@ -155,10 +155,9 @@ export function AddressForm() {
                         />
                     </div>
                     
-                    <div>
+                    <div className="complemento">
                         <label htmlFor="">{errors?.complemento?.message}</label>
                         <input
-                            className="complemento"
                             value={addressData.complemento}
                             type="text"
                             placeholder="Complemento"
@@ -185,10 +184,10 @@ export function AddressForm() {
                         />
                     </div>
 
-                    <div>
+                    <div className="cidade">
                         <label htmlFor="">{errors?.cidade?.message}</label>
                         <input
-                            className="cidade"
+                            
                             value={addressData.cidade}
                             type="text"
                             placeholder="Cidade"
@@ -199,10 +198,10 @@ export function AddressForm() {
                         />
                     </div>
 
-                    <div>
+                    <div className="uf">
                         <label htmlFor="">{errors?.uf?.message}</label>
                         <input
-                            className="uf"
+                            
                             value={addressData.uf}
                             type="text"
                             maxLength={2}
@@ -225,8 +224,8 @@ export function AddressForm() {
                     </div>
                 </header>
 
-                <div className="row">
                 <label htmlFor="">{errors?.paymentMethod?.message}</label>
+                <div className="row">
                     {
                         paymentOptions.map(o => {
                             return (

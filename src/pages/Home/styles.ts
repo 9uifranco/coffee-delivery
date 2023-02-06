@@ -99,6 +99,15 @@ export const HomeContainer = styled.main`
     }
 
     @media (min-width: 768px) and (max-width: 1100px) {
+        header {
+            width: 60%;
+        }
+
+        header > div {
+            grid-template-columns: 1fr;
+            width: 100%;
+        }
+
         section > div {
             grid-template-columns: 1fr 1fr;
         }

@@ -53,7 +53,6 @@ const InfoSectionContainer = styled.section`
         font-size: 0.875rem;
         border-radius: 4px;
         padding: 0.75rem;
-        margin-bottom: 1rem;
         outline: none;
         border: 1px solid #E6E5E5;
         background-color: #EDEDED;
@@ -90,8 +89,13 @@ export const AddressFormContainer = styled(InfoSectionContainer)`
     display: flex;
     flex-direction: column;
 
-    .row > input + input {
-        margin-left: 0.75rem;
+    > div + div {
+        margin-top: 1rem;
+        
+    }
+
+    .row {
+        gap: 0.75rem;
     }
 
     .cep, .numero, .bairro {
@@ -114,6 +118,8 @@ export const AddressFormContainer = styled(InfoSectionContainer)`
     label {
         color: red;
         font-size: 0.75rem;
+        position: absolute;
+        margin-top: -0.875rem;
     }
 
     @media (max-width: 768px) {
@@ -131,6 +137,8 @@ export const PaymentMethodContainer = styled(InfoSectionContainer)`
     label {
         color: red;
         font-size: 0.75rem;
+        position: absolute;
+        margin-top: -0.875rem;
     }
 
     @media (max-width: 768px) {
@@ -138,6 +146,11 @@ export const PaymentMethodContainer = styled(InfoSectionContainer)`
             flex-direction: column;
             gap: 1rem;
         }
+    }
+
+    > div > div {
+        display: flex;
+        flex-direction: row;
     }
 `
 
