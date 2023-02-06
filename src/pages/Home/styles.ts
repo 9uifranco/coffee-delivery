@@ -31,6 +31,23 @@ export const HomeContainer = styled.main`
         line-height: 130%;    
     }
 
+    header > div {
+        margin-top: 4.125rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 37rem;
+    }
+
+    header > div > div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-family: 'Roboto', sans-serif;
+        font-size: 1rem;
+        color: #574F4D;
+        margin-bottom: 1.5rem;
+    }
+
     section {
         margin: 0 10rem;
     }
@@ -51,23 +68,6 @@ export const HomeContainer = styled.main`
         margin-top: 3.375rem;
     }
 
-    .benefits {
-        margin-top: 4.125rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        width: 37rem;
-    }
-
-    .benefits > div {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-family: 'Roboto', sans-serif;
-        font-size: 1rem;
-        color: #574F4D;
-        margin-bottom: 1.5rem;
-    }
-
     @media (max-width: 768px) {
         background-size: auto;
 
@@ -78,7 +78,7 @@ export const HomeContainer = styled.main`
             padding-top: 3rem;
         }
 
-        .benefits {
+        header > div {
             grid-template-columns: 1fr;
             width: 100%;
         }

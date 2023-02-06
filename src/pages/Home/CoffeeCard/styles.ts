@@ -7,7 +7,6 @@ export const CoffeeCardContainer = styled.article`
     align-items: center;
     background-color: #F3F2F2;
     width: 16rem;
-    //height: 19.375rem;
     margin-bottom: 2.5rem;
     border-top-left-radius: 6px;
     border-top-right-radius: 36px;
