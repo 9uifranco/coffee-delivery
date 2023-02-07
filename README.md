@@ -14,7 +14,7 @@ You can test it [here](https://coffee-delivery-react.web.app/)
 
 [Design](https://www.figma.com/file/8XTipriDmj3W2cOLetHzNq/Coffee-Delivery?t=r9fHhKByOHFOAbso-6) not made by me, I only coded the app
 
-##Installation
+## Installation
 
 Clone the repository:
 
