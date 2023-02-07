@@ -99,3 +99,20 @@ export const IconContainerYellow = styled(IconContainer)`
 export const IconContainerPurple = styled(IconContainer)`
     background-color: #8047F8;
 `
+
+export const NewOrderButton = styled.button`
+    width: 50%;
+    height: 2.875rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #DBAC2C;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    :hover {
+        background-color: #C47F17;
+    }
+`

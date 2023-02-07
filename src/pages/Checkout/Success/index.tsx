@@ -1,11 +1,19 @@
 import illustration from '../../../assets/illustration-success.png'
-import { IconContainerPurple, IconContainerYellow, IconContainerYellowDark, OrderInfo, OrderInfoRow, SuccessContainer } from './styles'
+import { IconContainerPurple, IconContainerYellow, IconContainerYellowDark, NewOrderButton, OrderInfo, OrderInfoRow, SuccessContainer } from './styles'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useContext } from 'react'
 import { CartContext } from '../../../contexts/CartContext'
+import { useNavigate } from 'react-router-dom'
 
 export function Success() {
-    const { addressData, paymentSelected } = useContext(CartContext)
+    const { addressData, paymentSelected, resetCheckout } = useContext(CartContext)
+
+    const navigate = useNavigate();
+
+    function handleClickMakeNewOrder() {
+        navigate("/");
+        resetCheckout()
+    }
 
     return (
         <SuccessContainer>
@@ -60,6 +68,9 @@ export function Success() {
             <div>
                 <img src={illustration}/>
             </div>
+            <NewOrderButton onClick={handleClickMakeNewOrder}>
+                Fazer novo pedido
+            </NewOrderButton>
         </SuccessContainer>
     )
 }
