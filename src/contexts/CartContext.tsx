@@ -31,6 +31,7 @@ interface CartContextType {
     removeSelectedCoffeeFromCart(id: number): void
     increaseSelectedCoffeeAmount(id: number): void
     decreaseSelectedCoffeeAmount(id: number): void
+    resetCheckout(): void
 }
 
 export const CartContext = createContext({} as CartContextType) 
@@ -44,7 +45,8 @@ const initialCoffees: NewCoffeeData[] = [];
 const initializer = (initialValue = initialCoffees) => {
     const itemFromStorage = localStorage.getItem("@coffee-delivery:selected-coffees-1.0.0")
     if(itemFromStorage)
-        return JSON.parse(itemFromStorage) || initialValue;
+        return JSON.parse(itemFromStorage) || initialValue
+    return initialValue
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
@@ -82,6 +84,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                     return coffee;
                 }) 
 
+            case 'RESET':
+                return initialCoffees;
+
             default:
                 return state
         }
@@ -103,7 +108,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
     useEffect(() => {
         const stateJSON = JSON.stringify(selectedCoffees)
-        localStorage.setItem('@coffee-delivery:selected-coffees-1.0.0', stateJSON)
+        if(stateJSON)
+            localStorage.setItem('@coffee-delivery:selected-coffees-1.0.0', stateJSON)
     }, [selectedCoffees])
 
     function addNewCoffeeToCart(newCoffee: NewCoffeeData) {
@@ -164,6 +170,23 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         setCheckoutHasSucceed(true)
     }
 
+    function resetCheckout() {
+        setCheckoutHasSucceed(false)
+        setAddressData({
+            cep: '',
+            rua: '',
+            numero: '',
+            complemento: '',
+            bairro: '',
+            cidade: '',
+            uf: ''
+        })
+        setPaymentSelected("")
+        dispatch({
+            type: 'RESET'
+        })
+    }
+
     return (
         <CartContext.Provider value={{
                 coffees: selectedCoffees,
@@ -177,7 +200,8 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
                 updateSelectedCoffee,
                 removeSelectedCoffeeFromCart,
                 increaseSelectedCoffeeAmount,
-                decreaseSelectedCoffeeAmount
+                decreaseSelectedCoffeeAmount,
+                resetCheckout
             }}>
             {children}
         </CartContext.Provider>
